@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The U-Turn | Your Virtual Empowerment Centre</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c0a1e; /* Dark blue-black */
+            color: #f0f2f5; /* Off-white */
+            opacity: 0;
+            animation: fadeInBody 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeInBody {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Custom gradient for hero and other sections */
+        .gradient-bg {
+            background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.2), transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.15), transparent 50%);
+        }
+        
+        /* Custom gradient for text */
+        .gradient-text {
+            background: linear-gradient(90deg, #FBBF24, #A78BFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Styling for active nav link */
+        .nav-link.active {
+            color: #FBBF24; /* Gold */
+            font-weight: 700;
+        }
+        
+        /* Animation for elements fading in on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom button styles */
+        .btn {
+            @apply inline-block px-8 py-4 text-lg font-bold rounded-lg transition-all duration-300 ease-in-out;
+            transform: scale(1);
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .btn-gold {
+            @apply bg-blue-300 text-yellow-400 hover:bg-blue-400 shadow-lg shadow-blue-500/20 hover:shadow-blue-400/40;
+        }
+        .btn-purple {
+             @apply bg-blue-300 text-yellow-400 hover:bg-blue-400 shadow-lg shadow-blue-500/20 hover:shadow-blue-400/40;
+        }
+        .btn-blue {
+             @apply bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-600/20 hover:shadow-blue-500/40;
+        }
+        
+        /* Testimonial slider styles */
+        .testimonial-slide {
+            display: none;
+        }
+        .testimonial-slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        .non-negotiable-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .non-negotiable-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .mentorship-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .mentorship-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes slide-down {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-down {
+            animation: slide-down 1s ease-in-out forwards;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-blue-900 fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform -translate-y-full animate-slide-down">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center gap-3 text-2xl font-black gradient-text">
+                <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center shadow-md">
+                    <img src="LOGO.png" alt="The U-Turn Logo" class="w-12 h-12">
+                </div>
+                <span>The U-Turn</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="nav-link text-white hover:text-amber-400 transition-colors">Home</a>
+                <a href="#about" class="nav-link text-white hover:text-amber-400 transition-colors">About Us</a>
+                <a href="#mentorship" class="nav-link text-white hover:text-amber-400 transition-colors">Mentorship</a>
+                <a href="#podcast" class="nav-link text-white hover:text-amber-400 transition-colors">Podcast</a>
+                <a href="#get-involved" class="nav-link text-white hover:text-amber-400 transition-colors">Get Involved</a>
+                <a href="#contact" class="nav-link text-white hover:text-amber-400 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-purple-950">
+            <a href="#home" class="block py-3 px-6 text-white hover:bg-purple-700 transition-colors">Home</a>
+            <a href="#about" class="block py-3 px-6 text-white hover:bg-purple-700 transition-colors">About Us</a>
+            <a href="#mentorship" class="block py-3 px-6 text-white hover:bg-purple-700 transition-colors">Mentorship</a>
+            <a href="#podcast" class="block py-3 px-6 text-white hover:bg-purple-700 transition-colors">Podcast</a>
+            <a href="#get-involved" class="block py-3 px-6 text-white hover:bg-purple-700 transition-colors">Get Involved</a>
+            <a href="#contact" class="block py-3 px-6 text-white hover:bg-purple-700 transition-colors">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Home/Landing Page -->
+        <section id="home" class="min-h-screen flex items-center pt-24 md:pt-0 gradient-bg">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight reveal">
+                        Welcome to <span class="gradient-text">The U-Turn</span> — Your Virtual Empowerment Centre
+                    </h1>
+                    <p class="mt-6 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto reveal">
+                        Whether you're navigating a job search, building new skills, seeking mentorship, or simply ready to share your story — we’re here for you.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="btn" style="background-color: navy; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Join the Mentorship Program Today</a>
+                        <a href="https://calendar.google.com/calendar/u/0/r?cid=YOUR_CALENDAR_ID" target="_blank" class="btn" style="background-color: purple; color: gold; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Upcoming Events Calendar</a>
+                    </div>
+        </section>
+
+        
+
+        <!-- Section 3: About Us -->
+        <section id="about" class="py-20 md:py-32 gradient-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold text-white">Why We Built <span class="gradient-text">The U-Turn</span></h2>
+                    <p class="mt-4 text-lg text-slate-300">The U-Turn was born out of lived experience, deep frustration and the determination to create change. Our founding team is a diverse collective of women with rich personal stories, professional expertise, and a shared passion for helping others navigate life’s turning points.</p>
+                </div>
+
+                <!-- Our Story Content -->
+                <div class="py-20 md:py-32">
+                    <div class="container mx-auto px-6">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="reveal">
+                                <h2 class="text-3xl md:text-5xl font-bold text-white">Our Story</h2>
+                                <p class="mt-4 text-lg text-slate-300">The U-Turn supports women and youth facing career and life transitions by offering mentorship, practical training, and empowering guidance.</p>
+                                <p class="mt-4 text-lg text-slate-300 italic">Rooted in the African philosophy of Ubuntu — <span class="font-bold gradient-text">“I am because we are”</span> — we believe that collective strength, shared growth, and community support are the keys to lasting success.</p>
+                                
+                            </div>
+                            <div class="reveal">
+                                <img src="Maya-quote.png" alt="Maya Angelou Quote" class="rounded-2xl shadow-2xl w-full h-auto object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Founder's Story -->
+                <div class="mt-20 grid md:grid-cols-5 gap-12 items-center reveal">
+                    <div class="md:col-span-2">
+                        <img src="Akuol1.JPG" alt="Rhoda Akuol Philip, Founder" class="rounded-2xl shadow-2xl w-full h-auto object-cover">
+                    </div>
+                    <div class="md:col-span-3">
+                        <h3 class="text-2xl md:text-3xl font-bold text-white">Our Founder: Rhoda Akuol Philip</h3>
+                        <p class="mt-4 text-slate-300">Rhoda is a proud South Sudanese-Canadian with a BCom in Technology Management from the University of British Columbia, a Master’s in Public Policy from the University of Toronto, and is currently pursuing her PhD. She has worked across sectors — from startups and nonprofits to academic institutions — and brings a unique lens to career development, systems change, and mentorship. Her commitment to community advocacy is reflected in her service on various advisory boards, including the Pan-Canadian Voice for Women’s Housing (PCVWH).</p>
+                        <p class="mt-4 text-slate-300">Each of us has walked the path of immigration and career reinvention. Our education and opportunities in Canada helped us overcome these barriers — now, we're committed to helping others do the same.</p>
+                    </div>
+                </div>
+                
+                <!-- Our Non-Negotiables -->
+                <div class="mt-20 reveal"> 
+                    <h3 class="text-center text-3xl md:text-4xl font-bold text-white">Our Non-Negotiables</h3>
+                    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-8 text-center">
+                        <div class="bg-purple-900/50 p-6 rounded-xl non-negotiable-card">
+                            <h4 class="text-xl font-bold text-amber-400">Inclusivity</h4>
+                            <p class="mt-2 text-slate-400">Creating spaces that are for us, by us. Where acceptance is the guiding rule.</p>
+                        </div>
+                         <div class="bg-purple-900/50 p-6 rounded-xl non-negotiable-card">
+                            <h4 class="text-xl font-bold text-amber-400">Empowerment</h4>
+                            <p class="mt-2 text-slate-400">Providing the tools, knowledge, and resources to succeed in your journey.</p>
+                        </div>
+                         <div class="bg-purple-900/50 p-6 rounded-xl non-negotiable-card">
+                            <h4 class="text-xl font-bold text-amber-400">Sustainability</h4>
+                            <p class="mt-2 text-slate-400">Promoting long-term growth and self-sufficiency for individuals and communities.</p>
+                        </div>
+                         <div class="bg-purple-900/50 p-6 rounded-xl non-negotiable-card">
+                            <h4 class="text-xl font-bold text-amber-400">Collaboration</h4>
+                            <p class="mt-2 text-slate-400">Rooted in Ubuntu, we build networks to help you achieve your dreams.</p>
+                        </div>
+                         <div class="bg-purple-900/50 p-6 rounded-xl non-negotiable-card">
+                            <h4 class="text-xl font-bold text-amber-400">Integrity</h4>
+                            <p class="mt-2 text-slate-400">Upholding the highest standards of ethics and professionalism in all activities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meet the Team -->
+                <div class="mt-20 reveal">
+                    <h3 class="text-center text-3xl md:text-4xl font-bold text-white">Meet Our Team</h3>
+                    <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <!-- Team Member Card -->
+                        <div class="text-center">
+                            <img src="Akuol2.jpeg" class="w-40 h-40 mx-auto rounded-full object-cover shadow-lg" alt="Rhoda Akuol Philip">
+                            <h4 class="mt-4 text-xl font-bold text-white">Rhoda Akuol Philip</h4>
+                            <p class="text-purple-400">Founder & Strategist</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="MonicaJ.jpeg" class="w-40 h-40 mx-auto rounded-full object-cover shadow-lg" alt="Monica Johnson">
+                            <h4 class="mt-4 text-xl font-bold text-white">Monica Johnson</h4>
+                            <p class="text-purple-400">Co-founder & Partnerships</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="MonicaD.jpeg" class="w-40 h-40 mx-auto rounded-full object-cover shadow-lg" alt="Monica Deng">
+                            <h4 class="mt-4 text-xl font-bold text-white">Monica Deng</h4>
+                            <p class="text-purple-400">Co-founder & Operations</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="Adich.JPG" class="w-40 h-40 mx-auto rounded-full object-cover shadow-lg" alt="Dorcas Adich">
+                            <h4 class="mt-4 text-xl font-bold text-white">Dorcas Adich</h4>
+                            <p class="text-purple-400">Mentor & Communications</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Mentorship -->
+        <section id="mentorship" class="py-20 md:py-32 bg-[#100d2b]">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold text-white">Guiding You Toward <span class="gradient-text">Purpose & Possibility</span></h2>
+                    <p class="mt-4 text-lg text-slate-300">The U-Turn Method Mentorship Program empowers women and youth to access meaningful guidance, build life-changing connections, and unlock both personal and professional success.</p>
+                </div>
+
+                <div class="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+                    <!-- Service Card -->
+                    <div class="bg-purple-900/50 p-8 rounded-xl border border-purple-800/50 mentorship-card">
+                        <i class="fas fa-file-alt text-3xl text-amber-400"></i>
+                        <h3 class="mt-4 text-xl font-bold text-white">Resumes & Cover Letters</h3>
+                    </div>
+                    <div class="bg-purple-900/50 p-8 rounded-xl border border-purple-800/50 mentorship-card">
+                        <i class="fas fa-comments text-3xl text-amber-400"></i>
+                        <h3 class="mt-4 text-xl font-bold text-white">Interview Skills</h3>
+                    </div>
+                    <div class="bg-purple-900/50 p-8 rounded-xl border border-purple-800/50 mentorship-card">
+                        <i class="fas fa-user-tie text-3xl text-amber-400"></i>
+                        <h3 class="mt-4 text-xl font-bold text-white">Personal Branding</h3>
+                    </div>
+                    <div class="bg-purple-900/50 p-8 rounded-xl border border-purple-800/50 mentorship-card">
+                        <i class="fas fa-hands-helping text-3xl text-amber-400"></i>
+                        <h3 class="mt-4 text-xl font-bold text-white">1:1 Mentorship</h3>
+                    </div>
+                    <div class="bg-purple-900/50 p-8 rounded-xl border border-purple-800/50 mentorship-card">
+                        <i class="fas fa-graduation-cap text-3xl text-amber-400"></i>
+                        <h3 class="mt-4 text-xl font-bold text-white">College Applications</h3>
+                    </div>
+                    <div class="bg-purple-900/50 p-8 rounded-xl border border-purple-800/50 mentorship-card">
+                        <i class="fas fa-lightbulb text-3xl text-amber-400"></i>
+                        <h3 class="mt-4 text-xl font-bold text-white">Business Idea Development</h3>
+                    </div>
+                </div>
+
+                <div class="mt-20 text-center reveal">
+                    <h3 class="text-2xl font-bold text-white">Ready to Take Your Next Step?</h3>
+                    <p class="text-slate-300 mt-2">Let’s build your future, together.</p>
+                    <!-- UPDATE LINK: Replace the href value with your actual Google Form link for course sign-ups. -->
+                    <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="mt-8 btn" style="background-color: navy; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Join the Mentorship Program Today</a>
+                    <a href="https://calendar.google.com/calendar/u/0/r?cid=YOUR_CALENDAR_ID" target="_blank" class="mt-8 btn" style="background-color: purple; color: gold; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Upcoming Events Link to Google Calendar</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonial Section -->
+        <section class="py-20 md:py-32 gradient-bg">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-5xl font-bold text-white reveal">Real Stories, <span class="gradient-text">Real Impact</span></h2>
+                <div id="testimonial-slider" class="mt-12 max-w-3xl mx-auto relative h-48">
+                    <div class="testimonial-slide active">
+                        <p class="text-2xl italic text-slate-200">"Before The U-Turn, I felt confused. Now I feel grounded, supported, and strong."</p>
+                        <p class="mt-4 text-lg font-bold text-amber-400">— Anyieth, U-Turn Mentee</p>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="text-2xl italic text-slate-200">"This mentorship helped me rebuild my confidence."</p>
+                        <p class="mt-4 text-lg font-bold text-amber-400">— Abraham, Youth Participant</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Podcast -->
+        <section id="podcast" class="py-20 md:py-32 bg-[#100d2b]">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="reveal">
+                        <img src="Podcast.png" alt="Podcast Mic" class="rounded-2xl shadow-2xl w-full h-auto object-cover">
+                    </div>
+                    <div class="reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold text-white">Share Your U-Turn Story <span class="gradient-text">with the World</span></h2>
+                        <p class="mt-4 text-lg text-slate-300">Have you made a bold pivot in life, career, or community work? Are you a woman or youth transforming challenges into change? We want to hear from you.</p>
+                        <p class="mt-4 text-lg text-slate-300">Be a guest on The U-Turn Podcast — where your journey can inspire, educate, and empower others to make their own turn toward purpose.</p>
+                        <!-- UPDATE LINK: Replace the href value with your actual Google Form link for podcast guest applications. -->
+                        <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="mt-8 btn" style="background-color: navy; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Apply Now to Be a Guest</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Get Involved -->
+        <section id="get-involved" class="py-20 md:py-32 text-center gradient-bg">
+            <div class="container mx-auto px-6 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold text-white">Fuel The <span class="gradient-text">U-Turn</span>.</h2>
+                <p class="mt-4 text-lg text-slate-300 max-w-3xl mx-auto">Your support helps us mentor the next generation of resilient leaders, spotlight powerful stories, and offer accessible tools, guidance, and hope to those ready to turn their lives around.</p>
+                <div class="mt-12">
+                    <img src="ubuntu2.png" alt="Ubuntu" class="mx-auto mb-8 rounded-lg shadow-lg w-full md:w-1/2 lg:w-1/3">
+                    <p class="mt-6 text-xl font-bold text-white">Every U-Turn needs a spark. Be that spark.</p>
+                </div>
+                <!-- UPDATE LINK: Replace the href value with your specific PayPal donation link if you have one. -->
+                <a href="https://www.paypal.com/donate" target="_blank" class="mt-8 btn" style="background-color: #FFD700; color: navy; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Donate with PayPal <span style="color: red;">❤️</span></a>
+            </div>
+        </section>
+
+        <!-- Section 7: Contact Us -->
+        <section id="contact" class="py-20 md:py-32 bg-[#100d2b]">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold text-white">Let’s Connect. <span class="gradient-text">Your U-Turn Starts Here.</span></h2>
+                    <p class="mt-4 text-lg text-slate-300">Whether you're navigating change, seeking support, interested in collaborating, or ready to share your story — we’re here for you.</p>
+                </div>
+                <div class="mt-16 text-center reveal">
+                    <!-- UPDATE LINK: Replace the href value with your actual Google Form link for contact inquiries. -->
+                    <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="mt-8 btn" style="background-color: navy; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        Let’s Create Impact Together
+                    </a>
+                    <!-- UPDATE LINK: Replace the WhatsApp number in the href with your actual number. -->
+                    <p class="mt-8 text-slate-400">Or reach out via WhatsApp: <a href="https://wa.me/254111602625" class="text-amber-400 hover:underline">+254111602625</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-950 py-12">
+        <div class="container mx-auto px-6 text-center text-slate-400">
+            <div class="mb-6">
+                <a href="#" class="text-2xl font-black gradient-text">The U-Turn</a>
+            </div>
+            <!-- UPDATE LINKS: Replace the '#' in the href for each social media icon with your actual profile URLs. -->
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://www.instagram.com/uturnow180/?igsh=MTBvaWhiNXpzdnJtcA%3D%3D#" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/Uturnow?mibextid=wwXIfr" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/company/the-u-turn/" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/@theuturn180" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; <span id="year"></span> The U-Turn. All Rights Reserved. A virtual empowerment centre for women and youth.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Toggle icon between bars and times
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // --- Close mobile menu on link click ---
+            const mobileLinks = mobileMenu.getElementsByTagName('a');
+            for (let link of mobileLinks) {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            }
+
+            // --- Active Nav Link Highlighting on Scroll ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // 50% of the section must be visible
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // --- Testimonial Slider ---
+            const slides = document.querySelectorAll('.testimonial-slide');
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    if (i === index) {
+                        slide.classList.add('active');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            if (slides.length > 1) {
+                setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+
+            // --- Scroll Reveal Animation ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Optional: unobserve after revealing to save resources
+                        // revealObserver.unobserve(entry.target); 
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+            
+            // --- Dynamic Year in Footer ---
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // --- Header Shadow on Scroll ---
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('shadow-lg');
+                } else {
+                    header.classList.remove('shadow-lg');
+                }
+            });
+        
+        });
+    </script>
+
+</body>
+</html>
