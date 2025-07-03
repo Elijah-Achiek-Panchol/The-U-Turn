@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The U-Turn | Your Virtual Empowerment Centre</title>
+    <link rel="icon" href="LOGO.png" type="image/png">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,10 +21,30 @@
         /* Custom Styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0c0a1e; /* Dark blue-black */
+            background-color: #0c0a1e; /* Fallback color */
             color: #f0f2f5; /* Off-white */
             opacity: 0;
             animation: fadeInBody 1s ease-in-out forwards;
+            position: relative; /* Needed for z-indexing content */
+            z-index: 1;
+        }
+
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0c0a1e, #1a1a3d, #4a2e6b, #2c1e4a, #1f3a5d, #100d2b, #3c2f5d, #1e1b3b);
+            background-size: 600% 600%;
+            animation: colorCycle 30s ease infinite;
+        }
+
+        @keyframes colorCycle {
+            0% { background-position: 0% 100%; }
+            50% { background-position: 100% 0%; }
+            100% { background-position: 0% 100%; }
         }
 
         @keyframes fadeInBody {
@@ -34,8 +55,8 @@
 
         /* Custom gradient for hero and other sections */
         .gradient-bg {
-            background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.2), transparent 40%),
-                        radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.15), transparent 50%);
+           /* The complex background is now global, this class can be simplified or removed */
+           background: transparent;
         }
         
         /* Custom gradient for text */
@@ -49,6 +70,14 @@
         .nav-link.active {
             color: #FBBF24; /* Gold */
             font-weight: 700;
+        }
+
+        /* Glassmorphism header style */
+        .header-scrolled {
+            background-color: rgba(12, 10, 30, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         /* Animation for elements fading in on scroll */
@@ -67,18 +96,33 @@
         .btn {
             @apply inline-block px-8 py-4 text-lg font-bold rounded-lg transition-all duration-300 ease-in-out;
             transform: scale(1);
+            text-decoration: none; /* Ensure links don't have underlines */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .btn:hover {
             transform: scale(1.05);
         }
-        .btn-gold {
-            @apply bg-blue-300 text-yellow-400 hover:bg-blue-400 shadow-lg shadow-blue-500/20 hover:shadow-blue-400/40;
+        .btn-primary {
+            background-color: navy;
+            color: white;
         }
-        .btn-purple {
-             @apply bg-blue-300 text-yellow-400 hover:bg-blue-400 shadow-lg shadow-blue-500/20 hover:shadow-blue-400/40;
+        .btn-secondary {
+            background-color: purple;
+            color: gold;
         }
-        .btn-blue {
-             @apply bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-600/20 hover:shadow-blue-500/40;
+        .btn-accent {
+            background-color: #FFD700;
+            color: navy;
+        }
+        .btn-accent:hover {
+            background-color: #fde047; /* Lighter gold */
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+        .btn-accent .fa-arrow-right {
+            transition: transform 0.3s ease-in-out;
+        }
+        .btn-accent:hover .fa-arrow-right {
+            transform: translateX(5px);
         }
         
         /* Testimonial slider styles */
@@ -129,12 +173,37 @@
         .animate-slide-down {
             animation: slide-down 1s ease-in-out forwards;
         }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .heart-emoji {
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        /* Social Media Icon Colors */
+        .social-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+        .fa-instagram { color: #E4405F; } /* Instagram Pink */
+        .fa-facebook { color: #1877F2; }  /* Facebook Blue */
+        .fa-linkedin { color: #0A66C2; }  /* LinkedIn Blue */
+        .fa-youtube { color: #FF0000; }   /* YouTube Red */
     </style>
 </head>
 <body class="antialiased">
 
+    <!-- Animated Background -->
+    <div class="animated-background"></div>
+
     <!-- Header & Navigation -->
-    <header id="header" class="bg-blue-900 fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform -translate-y-full animate-slide-down">
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform -translate-y-full animate-slide-down">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#home" class="flex items-center gap-3 text-2xl font-black gradient-text">
                 <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center shadow-md">
@@ -145,12 +214,12 @@
             
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#home" class="nav-link text-white hover:text-amber-400 transition-colors">Home</a>
-                <a href="#about" class="nav-link text-white hover:text-amber-400 transition-colors">About Us</a>
-                <a href="#mentorship" class="nav-link text-white hover:text-amber-400 transition-colors">Mentorship</a>
-                <a href="#podcast" class="nav-link text-white hover:text-amber-400 transition-colors">Podcast</a>
-                <a href="#get-involved" class="nav-link text-white hover:text-amber-400 transition-colors">Get Involved</a>
-                <a href="#contact" class="nav-link text-white hover:text-amber-400 transition-colors">Contact</a>
+                <a href="#home" class="nav-link text-white transition-colors">Home</a>
+                <a href="#about" class="nav-link text-white transition-colors">About Us</a>
+                <a href="#mentorship" class="nav-link text-white transition-colors">Mentorship</a>
+                <a href="#podcast" class="nav-link text-white transition-colors">Podcast</a>
+                <a href="#get-involved" class="nav-link text-white transition-colors">Get Involved</a>
+                <a href="#contact" class="nav-link text-white transition-colors">Contact</a>
             </nav>
 
             <!-- Mobile Menu Button -->
@@ -172,7 +241,7 @@
 
     <main>
         <!-- Section 1: Home/Landing Page -->
-        <section id="home" class="min-h-screen flex items-center pt-24 md:pt-0 gradient-bg">
+        <section id="home" class="min-h-screen flex items-center pt-48 md:pt-32 gradient-bg">
             <div class="container mx-auto px-6 text-center">
                 <div class="max-w-4xl mx-auto">
                     <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight reveal">
@@ -181,6 +250,9 @@
                     <p class="mt-6 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto reveal">
                         Whether you're navigating a job search, building new skills, seeking mentorship, or simply ready to share your story — we’re here for you.
                     </p>
+                    <div class="my-8 reveal">
+                        <img src="empower.png" alt="Empowerment at The U-Turn" class="mx-auto rounded-lg shadow-lg w-full max-w-md">
+                    </div>
                     <div class="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
                         <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="btn" style="background-color: navy; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Join the Mentorship Program Today</a>
                         <a href="https://calendar.google.com/calendar/u/0/r?cid=YOUR_CALENDAR_ID" target="_blank" class="btn" style="background-color: purple; color: gold; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Upcoming Events Calendar</a>
@@ -324,7 +396,7 @@
                     <p class="text-slate-300 mt-2">Let’s build your future, together.</p>
                     <!-- UPDATE LINK: Replace the href value with your actual Google Form link for course sign-ups. -->
                     <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="mt-8 btn" style="background-color: navy; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Join the Mentorship Program Today</a>
-                    <a href="https://calendar.google.com/calendar/u/0/r?cid=YOUR_CALENDAR_ID" target="_blank" class="mt-8 btn" style="background-color: purple; color: gold; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Upcoming Events Link to Google Calendar</a>
+                    <a href="https://calendar.google.com/calendar/u/0/r?cid=YOUR_CALENDAR_ID" target="_blank" class="mt-8 btn" style="background-color: purple; color: gold; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Upcoming Events Calendar</a>
                 </div>
             </div>
         </section>
@@ -374,24 +446,27 @@
                     <p class="mt-6 text-xl font-bold text-white">Every U-Turn needs a spark. Be that spark.</p>
                 </div>
                 <!-- UPDATE LINK: Replace the href value with your specific PayPal donation link if you have one. -->
-                <a href="https://www.paypal.com/donate" target="_blank" class="mt-8 btn" style="background-color: #FFD700; color: navy; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Donate with PayPal <span style="color: red;">❤️</span></a>
+                <a href="https://www.paypal.com/donate" target="_blank" class="mt-8 btn" style="background-color: #FFD700; color: navy; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Donate with PayPal <span class="heart-emoji" style="color: red;">❤️</span></a>
             </div>
         </section>
 
         <!-- Section 7: Contact Us -->
-        <section id="contact" class="py-20 md:py-32 bg-[#100d2b]">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto reveal">
-                    <h2 class="text-3xl md:text-5xl font-bold text-white">Let’s Connect. <span class="gradient-text">Your U-Turn Starts Here.</span></h2>
-                    <p class="mt-4 text-lg text-slate-300">Whether you're navigating change, seeking support, interested in collaborating, or ready to share your story — we’re here for you.</p>
-                </div>
-                <div class="mt-16 text-center reveal">
-                    <!-- UPDATE LINK: Replace the href value with your actual Google Form link for contact inquiries. -->
-                    <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="mt-8 btn" style="background-color: navy; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                        Let’s Create Impact Together
-                    </a>
-                    <!-- UPDATE LINK: Replace the WhatsApp number in the href with your actual number. -->
-                    <p class="mt-8 text-slate-400">Or reach out via WhatsApp: <a href="https://wa.me/254111602625" class="text-amber-400 hover:underline">+254111602625</a></p>
+        <section id="contact" class="py-32 bg-cover bg-center relative" style="background-image: url('uturn.jpg');">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="container mx-auto px-6 relative z-10 flex justify-center items-start">
+                <div class="bg-gray-900 bg-opacity-70 p-8 md:p-12 rounded-2xl shadow-2xl max-w-4xl w-full">
+                    <div class="text-center max-w-3xl mx-auto reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold text-white">Let’s Connect. <span class="gradient-text">Your U-Turn Starts Here.</span></h2>
+                        <p class="mt-4 text-lg text-slate-200">Whether you're navigating change, seeking support, interested in collaborating, or ready to share your story — we’re here for you.</p>
+                    </div>
+                    <div class="mt-12 text-center reveal">
+                        <!-- UPDATE LINK: Replace the href value with your actual Google Form link for contact inquiries. -->
+                        <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="mt-8 btn btn-accent">
+                            Let’s Create Impact Together <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <!-- UPDATE LINK: Replace the WhatsApp number in the href with your actual number. -->
+                        <p class="mt-8 text-slate-300">Or reach out via WhatsApp: <a href="https://wa.me/254111602625" class="text-amber-400 hover:underline">+254111602625</a></p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -405,12 +480,12 @@
             </div>
             <!-- UPDATE LINKS: Replace the '#' in the href for each social media icon with your actual profile URLs. -->
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://www.instagram.com/uturnow180/?igsh=MTBvaWhiNXpzdnJtcA%3D%3D#" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/Uturnow?mibextid=wwXIfr" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.linkedin.com/company/the-u-turn/" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.youtube.com/@theuturn180" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/uturnow180/?igsh=MTBvaWhiNXpzdnJtcA%3D%3D#" class="social-icon"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="https://www.facebook.com/Uturnow?mibextid=wwXIfr" class="social-icon"><i class="fab fa-facebook text-2xl"></i></a>
+                <a href="https://www.linkedin.com/company/the-u-turn/" class="social-icon"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://www.youtube.com/@theuturn180" class="social-icon"><i class="fab fa-youtube text-2xl"></i></a>
             </div>
-            <p>&copy; <span id="year"></span> The U-Turn. All Rights Reserved. A virtual empowerment centre for women and youth.</p>
+            <p>&copy; <span id="year"></span> The U-Turn. All Rights Reserved. A virtual empowerment centre for women and youth. Developed by Al-Nahda-Tech Team</p>
         </div>
     </footer>
 
@@ -443,6 +518,24 @@
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
 
+            // Function to update active link
+            const updateActiveLink = (id) => {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            // Add click event listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const id = e.target.getAttribute('href').substring(1);
+                    updateActiveLink(id);
+                });
+            });
+
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
@@ -452,12 +545,7 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                link.classList.add('active');
-                            }
-                        });
+                        updateActiveLink(entry.target.id);
                     }
                 });
             }, observerOptions);
@@ -511,9 +599,9 @@
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
-                    header.classList.add('shadow-lg');
+                    header.classList.add('header-scrolled');
                 } else {
-                    header.classList.remove('shadow-lg');
+                    header.classList.remove('header-scrolled');
                 }
             });
         
